@@ -30,18 +30,19 @@ public class SzamologepTeszt {
         System.out.println("Ez minden teszt utan lefut.");
     }
 
-    @Test
+    @Test(groups = {"normal","osszeadas"}, description = "ez egy összeadás teszt", dependsOnGroups = {"szorzas"}, alwaysRun = true)
     public static void osszeadasTeszt() {
         Assert.assertEquals(Szamologep.osszeadas(1,2), 3); // 1 + 2 = 3 kell legyen :)
     }
 
-    @Test
+    @Test(groups = {"normal","szorzas"}, invocationCount = 3, dependsOnGroups = {"osztas"})
     public static void szorzasTeszt() {
         Assert.assertEquals(Szamologep.szorzas(0, 123456), 0);
         Assert.assertEquals(Szamologep.szorzas(3,4), 12);
+        Assert.fail("direkt elrontva");
     }
 
-    @Test
+    @Test(groups = {"normal","osztas"})
     public static void osztasTeszt() {
         Assert.assertEquals(Szamologep.osztas(5,1), 5); // 5:1=5
         Assert.assertEquals(Szamologep.osztas(16,2), 8);
